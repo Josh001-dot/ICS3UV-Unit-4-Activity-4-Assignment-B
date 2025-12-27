@@ -7,15 +7,17 @@ import (
 )
 
 // Global variables
-var odometer int = 65000
-var oilChangeKM int = 65000
-var carColor string = "Black"
-const carModel string = "Civic"
-const carMake string = "Honda"
-var gasCost [10]float64
-var fillUpCount int = 0
+var (
+	odometer    = 65000
+	oilChangeKM = 65000
+	carColor    = "Black"
+	carModel    = "Civic"
+	carMake     = "Honda"
+	gasCost     [10]float64
+	fillUpCount int
+)
 
-// Function to check if an oil change is needed
+// Check if an oil change is needed
 func oilChange(mileage int, oilChangeKM *int) bool {
 	if mileage-*oilChangeKM >= 5000 {
 		fmt.Println("An oil change was done.")
@@ -25,13 +27,13 @@ func oilChange(mileage int, oilChangeKM *int) bool {
 	return false
 }
 
-// Function to display car stats
+// Display car stats
 func carStats() {
 	fmt.Printf("\nCar Make: %s\nCar Model: %s\nCar Color: %s\nOdometer: %d km\nLast Oil Change: %d km\n",
 		carMake, carModel, carColor, odometer, oilChangeKM)
 }
 
-// Function to wrap car (change color)
+// Change car color
 func wrapCar() {
 	var newColor string
 	fmt.Print("Enter a new color for your car: ")
@@ -41,7 +43,7 @@ func wrapCar() {
 	}
 }
 
-// Function to drive car (random km 100–1000)
+// Drive car (random km 100–1000)
 func drive() int {
 	rand.Seed(time.Now().UnixNano())
 	kmDriven := rand.Intn(901) + 100 // 100–1000
@@ -49,7 +51,7 @@ func drive() int {
 	return kmDriven
 }
 
-// Function to fill up gas
+// Fill up gas
 func fillUp() {
 	if fillUpCount >= len(gasCost) {
 		fmt.Println("Gas cost array is full.")
@@ -62,7 +64,7 @@ func fillUp() {
 	fillUpCount++
 }
 
-// Function to display gas costs and average
+// Display gas costs and average
 func displayCostToFillUp() float64 {
 	total := 0.0
 	fmt.Println("\nGas Fill-Up Costs:")
@@ -75,27 +77,20 @@ func displayCostToFillUp() float64 {
 	return average
 }
 
-// Main program
 func main() {
 	carStats()
 
-	// Drive the car
 	km := drive()
 	fmt.Printf("You drove %d km.\n", km)
 
-	// Check oil change
-	if oilChange(odometer, &oilChangeKM) {
-		// oilChangeKM updated inside function
-	} else {
+	if !oilChange(odometer, &oilChangeKM) {
 		fmt.Println("Your car does not need an oil change.")
 	}
 
-	// Fill up gas twice
 	fillUp()
 	fillUp()
 	displayCostToFillUp()
 
-	// Wrap the car (change color)
 	wrapCar()
 	fmt.Printf("Your car is now %s.\n", carColor)
 
