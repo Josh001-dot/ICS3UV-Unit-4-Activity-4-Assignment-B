@@ -63,12 +63,12 @@ function displayCostToFillUp(): number {
 
 // ------------------------------
 // constants and variables
-let odometer: number = 65000;          // mileage of car
-let oilChangeKM: number = 65000;       // last oil change
-let carColor: string = "Black";        // car color
-let carModel: string = "Civic";        // car model
-let carMake: string = "Honda";         // car make
-let gasCost: number[] = new Array(10); // gas costs
+let odometer: number = 65000;           // mileage of car
+let oilChangeKM: number = 65000;        // last oil change
+let carColor: string = "Black";         // car color
+const carModel: string = "Civic";       // car model
+const carMake: string = "Honda";        // car make
+const gasCost: number[] = new Array(10); // gas costs
 let fillUpCount: number = 0;
 
 // ------------------------------
